@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var enterNameTextField: UITextField!
     @IBOutlet weak var enterMessageTextField: UITextField!
     @IBOutlet weak var sendMailButton: UIButton!
@@ -18,6 +19,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "endEditing:"))
+    }
+    
+    func endEditing(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,12 +32,26 @@ class ViewController: UIViewController {
     }
 
     @IBAction func sendMailButtonPressed(sender: UIButton) {
+        // set attributes of the message label
         messageLabel.hidden = false
         messageLabel.text = enterMessageTextField.text
         messageLabel.textColor = UIColor.redColor() // must create an instance of UIColor to update attribute
-        sendMailButton.setTitle("Mail Sent", forState: UIControlState.Normal)
+        
+        // set attributes of the name label
+        nameLabel.hidden = false
+        nameLabel.text = enterNameTextField.text
+        nameLabel.textColor = UIColor.blueColor()
+        
+        // set attributes of the message text field
         enterMessageTextField.text = ""
         enterMessageTextField.resignFirstResponder() // "loses focus" and closes keyboard
+        
+        // set attributes of the name text field
+        enterNameTextField.text = ""
+        enterNameTextField.resignFirstResponder()
+        
+        // set attributes of the send mail button
+        sendMailButton.setTitle("Mail Sent", forState: UIControlState.Normal) // must use a function because of second parameter
     }
     
     
