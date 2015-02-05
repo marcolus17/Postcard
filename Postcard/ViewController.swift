@@ -19,10 +19,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // TapGestureRecognizer for dismissing the keyboard
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "endEditing:"))
     }
     
+    // Function that handles TapGestureRecognizer in ViewDidLoad
     func endEditing(recognizer: UITapGestureRecognizer) {
+        // Ends editing mode and dismisses the keyboard
         self.view.endEditing(true)
     }
 
